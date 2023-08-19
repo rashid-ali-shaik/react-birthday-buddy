@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { User } from "./User";
+import { useState } from "react";
+import "./App.css";
+
+import data from "./data";
 
 function App() {
+  const [userData, setUserData] = useState(data);
+  const length = userData.length;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <section className="container">
+      <article className="container-center">
+        <h2 className="header">{`${length} birthdays today`}</h2>
+        <ul className="peoples">
+          {userData.map((user) => {
+            return <User key={user?.id} {...user} />;
+          })}
+        </ul>
+        <button onClick={() => setUserData([])} className="btn">
+          clear all
+        </button>
+      </article>
+    </section>
   );
 }
 
